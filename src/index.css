@@ -1,0 +1,17 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Comic+Relief&display=swap");
+
+@theme {
+  --font-roboto: "Roboto", sans-serif;
+  --font-comicrelief: "Comic Relief", sans-serif;
+  --color-primary: #cebebe;
+  --color-secondary: #372549;
+  --color-tertiary: #1a1423;
+  --color-error: #ac3931;
+  --color-background: #ece2d0;
+}
+
+html {
+  background-color: var(--color-background);
+}
