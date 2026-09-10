@@ -1,6 +1,6 @@
 import { MoveHorizontal } from "lucide-react";
 import React from "react";
-import Button from "../components/Button";
+import Button from "../../components/Button";
 
 const Homepage = () => {
   return (

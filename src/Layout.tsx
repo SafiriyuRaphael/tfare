@@ -1,14 +1,12 @@
 import React from "react";
 import { Outlet } from "react-router";
+import HeaderIcon from "./components/HeaderIcon";
 
 const Layout = () => {
   return (
     <div>
       <header className="">
-        <h1 className="text-center text-5xl font-bold font-roboto py-6 bg-secondary/80">
-          <span className="text-error">T</span>
-          <span className="text-primary">-Fare</span>
-        </h1>
+        <HeaderIcon />
       </header>
       <main className=" bg-cover bg-no-repeat bg-bottom min-h-screen relative z-20">
         <div className="absolute inset-0  -z-10">
