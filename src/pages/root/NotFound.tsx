@@ -1,5 +1,4 @@
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import React from "react";
 import Button from "../../components/Button";
 import { useNavigate } from "react-router";
 import { ArrowLeft, Home } from "lucide-react";

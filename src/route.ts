@@ -8,13 +8,13 @@ import Layout from "./Layout";
 import SignUp from "./pages/auth/SignUp";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import VerifyEmail from "./pages/auth/VerifyEmail";
-import Login from "./pages/auth/Login";
 import AuthLayout from "./pages/auth/AuthLayout";
+import LoginData from "./pages/auth/LoginData";
 
 export const routes = createBrowserRouter([
     {
         path: "auth", Component: AuthLayout, children: [
-            { Component: Login, path: "login", index: true, },
+            { Component: LoginData, path: "login", },
             { Component: SignUp, path: "signup" },
             { Component: ForgotPassword, path: "forgot-password" },
             { Component: VerifyEmail, path: "verify-email" },
