@@ -1,32 +1,23 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Input from "../../components/Input";
 import { Lock, Mail } from "lucide-react";
 import Button from "../../components/Button";
-import { Link, useSearchParams } from "react-router";
-import axios from "axios";
-import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
+import { login } from "../../services/login";
+import { Link } from "react-router";
+import { toast } from "sonner";
+import { authStore } from "../../store/authStore";
 
 const LoginData = () => {
-  const [queryData, setQueryData] = useSearchParams();
   const [userData, setUserData] = useState({ email: " ", password: "" });
-
-  const login = async () => {
-    const { email, password } = userData;
-
-    try {
-      await axios.post("http://localhost:4000/auth/login", {
-        email,
-        password,
-      });
-      toast.success("Login successful");
-    } catch (err) {
-      toast.error(err.response.data.error);
-    }
-  };
+  const { setUser } = authStore();
 
   const loginMutation = useMutation({
     mutationFn: login,
+    onSuccess: (data) => {
+      toast.success("Login Successful");
+      setUser({ userData: data.user, token: data.token });
+    },
   });
   return (
     <div className="space-y-3 flex flex-col ">
