@@ -3,9 +3,9 @@ import Input from "../../components/Input";
 import { Lock, Mail } from "lucide-react";
 import Button from "../../components/Button";
 import { useState } from "react";
-import { toast } from "sonner";
-import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
+import { signUp } from "../../services/signUp";
+import { toast } from "sonner";
 
 const SignUp = () => {
   const [userInfo, setUserInfo] = useState({
@@ -15,37 +15,11 @@ const SignUp = () => {
     confirmPassword: "",
   });
 
-  const submitUser = async () => {
-    const { username, email, password, confirmPassword } = userInfo;
-    if (!username || !email || !password || !confirmPassword) {
-      toast.error("Registration Failed", {
-        description: "data incomplete",
-      });
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      toast.error("Registration Failed", {
-        description: "password does not match",
-      });
-      return;
-    }
-
-    try {
-      const response = await axios.post("http://localhost:4000/auth/register", {
-        username: userInfo.username,
-        email: userInfo.email,
-        password: userInfo.password,
-      });
-
-      toast.message(response.data.message);
-    } catch (err) {
-      toast.error(err.response.data.error);
-    }
-  };
-
   const submitMutation = useMutation({
-    mutationFn: submitUser,
+    mutationFn: signUp,
+    onSuccess: (data) => {
+      toast.success(data.message);
+    },
   });
 
   return (
@@ -88,7 +62,7 @@ const SignUp = () => {
       <Button
         label="Sign Up"
         variant="secondary"
-        onClick={() => submitMutation.mutate()}
+        onClick={() => submitMutation.mutate(userInfo)}
         isLoading={submitMutation.isPending}
       />
       <Link to="/auth/login" className="text-center text-white hover:underline">

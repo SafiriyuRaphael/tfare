@@ -3,32 +3,24 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { toast } from "sonner";
+import { apiService } from "../../services/apiService";
+import { verifyToken } from "../../services/verifyToken";
 
 const VerifyEmail = () => {
   const [queryData, setQueryData] = useSearchParams();
   const token = queryData.get("token");
   const navigate = useNavigate();
 
-  const verifyToken = async () => {
-    try {
-      await axios.post("http://localhost:4000/auth/verify-email", {
-        token,
-      });
-    } catch (error) {
-      toast.error(error.response.data.error);
-    }
-  };
-
   const verifyMutate = useMutation({
     mutationFn: verifyToken,
-    onSuccess: () => {
-      // toast.success("Email verified successfull");
-      // navigate("/auth/login");
+    onSuccess: (data) => {
+      toast.success("Email verified successfull");
+      navigate("/auth/login");
     },
   });
 
   useEffect(() => {
-    verifyMutate.mutate();
+    verifyMutate.mutate({ token });
   }, [token]);
   return (
     <div className="text-center text-2xl text-white font-bold font-roboto">

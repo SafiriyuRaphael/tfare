@@ -26,7 +26,7 @@ const LoginData = () => {
           value={userData.email}
           onChange={(e) =>
             setUserData((data) => ({
-              password: data.password,
+              ...data,
               email: e.target.value,
             }))
           }
@@ -36,7 +36,10 @@ const LoginData = () => {
         <Input
           value={userData.password}
           onChange={(e) =>
-            setUserData({ ...userData, password: e.target.value })
+            setUserData((data) => ({
+              ...data,
+              password: e.target.value,
+            }))
           }
           placeholder="Password"
           type="password"
@@ -52,7 +55,7 @@ const LoginData = () => {
       <Button
         label="Login"
         variant="secondary"
-        onClick={() => loginMutation.mutate()}
+        onClick={() => loginMutation.mutate(userData)}
         isLoading={loginMutation.isPending}
       />
       <Link

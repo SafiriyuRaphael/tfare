@@ -13,7 +13,7 @@ const Button = ({
   onClick: () => void;
   IconLeft?: LucideIcon;
   variant: "primary" | "secondary" | "tertiary" | "error";
-  isLoading: boolean;
+  isLoading?: boolean;
 }) => {
   return (
     <button
